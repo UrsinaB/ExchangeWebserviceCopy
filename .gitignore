@@ -1,0 +1,6 @@
+.vscode/settings.json
+crm-webservice/.mvn/wrapper/maven-wrapper.jar
+crm-webservice/.mvn/wrapper/maven-wrapper.properties
+data/crm.mv.db
+crm-webservice/mvnw.cmd
+crm-webservice/mvnw
