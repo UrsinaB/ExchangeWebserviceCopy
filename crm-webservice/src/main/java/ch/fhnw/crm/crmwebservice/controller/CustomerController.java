@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/customer")
+@RequestMapping(path = "/api")
 public class CustomerController {
 
     @Autowired
@@ -24,17 +24,17 @@ public class CustomerController {
     public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer) {
         try {
             customer = customerService.editCustomer(customer);
-        } catch (ConstraintViolationException e) {
+         } catch (ConstraintViolationException e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getConstraintViolations().iterator().next().getMessage());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
 
-        URI location = ServletUriComponentsBuilder
+        /*URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{customerId}")
-                .buildAndExpand(customer.getId()).toUri();
+                .buildAndExpand(customer.getId()).toUri();*/
 
-        return ResponseEntity.created(location).body(customer);
+        return ResponseEntity.ok(customer);
     }
 
     @GetMapping(path = "/customer", produces = "application/json")

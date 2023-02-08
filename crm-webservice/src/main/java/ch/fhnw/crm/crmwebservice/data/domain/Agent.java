@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Agent {
     @Id
@@ -15,14 +18,14 @@ public class Agent {
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
-	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
-	//@JsonIgnore
+	@JsonIgnore
 	private String role = "USER";
 	@Transient // will not be stored in DB
 	private String remember;
 	@OneToMany(mappedBy = "agent")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Customer> customers;
 
 	public Long getId() {

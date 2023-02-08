@@ -1,5 +1,7 @@
 package ch.fhnw.crm.crmwebservice.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,7 +17,7 @@ public class Customer {
 	private String email;
 	private String mobile;
 	@ManyToOne
-	//@JsonIgnore
+	@JsonIgnore
 	private Agent agent;
 
 	public Long getId() {
