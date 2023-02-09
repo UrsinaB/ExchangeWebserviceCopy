@@ -35,15 +35,15 @@ public class AgentController {
        return agentService.getAllAgents();
     }
 
-    @GetMapping("/profile")
-    public @ResponseBody Agent getProfile() {
-        return agentService.getCurrentAgent();
+    @GetMapping("/profile/{agentId}")
+    public @ResponseBody Agent getProfile(@PathVariable(value = "agentId") String agentId) {
+        return agentService.getCurrentAgent(Long.parseLong(agentId));
     } 
 
-    @PutMapping("/profile")
-    public ResponseEntity<Void> putProfile(@RequestBody Agent agent) {
+    @PutMapping("/profile/{agentId}")
+    public ResponseEntity<Void> putProfile(@RequestBody Agent agent, @PathVariable(value = "agentId") String agentId) {
         try {
-            agent.setId(agentService.getCurrentAgent().getId());
+            agent.setId(Long.parseLong(agentId));
             agentService.saveAgent(agent);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());

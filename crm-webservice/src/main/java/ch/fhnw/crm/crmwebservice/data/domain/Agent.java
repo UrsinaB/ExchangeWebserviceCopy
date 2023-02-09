@@ -53,9 +53,7 @@ public class Agent {
 	}
 
 	public String getPassword() {
-		String transientPassword = this.password;
-		this.password = null;
-		return transientPassword;
+		return this.password;
 	}
 
 	public void setPassword(String password) {

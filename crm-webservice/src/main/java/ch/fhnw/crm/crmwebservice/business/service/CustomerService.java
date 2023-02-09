@@ -17,17 +17,17 @@ public class CustomerService {
 	@Autowired
 	private AgentService agentService;
 
-	public Customer editCustomer(@Valid Customer customer) throws Exception {
+	public Customer editCustomer(@Valid Customer customer, Long agentId) throws Exception {
 		if (customer.getId() == null) {
 			if (customerRepository.findByMobile(customer.getMobile()) == null) {
-				customer.setAgent(agentService.getCurrentAgent());
+				customer.setAgent(agentService.getCurrentAgent(agentId));
 				return customerRepository.save(customer);
 			}
 			throw new Exception("Mobile number " + customer.getMobile() + " already assigned to a customer.");
 		}
 		if (customerRepository.findByMobileAndIdNot(customer.getMobile(), customer.getId()) == null) {
 			if (customer.getAgent() == null) {
-				customer.setAgent(agentService.getCurrentAgent());
+				customer.setAgent(agentService.getCurrentAgent(agentId));
 			}
 			return customerRepository.save(customer);
 		}
@@ -39,15 +39,19 @@ public class CustomerService {
 		customerRepository.deleteById(customerId);
 	}
 	
-	public Customer findCustomerById(Long customerId) throws Exception {
-		List<Customer> customerList = customerRepository.findByIdAndAgentId(customerId, agentService.getCurrentAgent().getId());
+	public Customer findCustomerById(Long customerId, Long agentId) throws Exception {
+		List<Customer> customerList = customerRepository.findByIdAndAgentId(customerId, agentId);
 		if(customerList.isEmpty()){
 			throw new Exception("No customer with ID "+customerId+" found.");
 		}
 		return customerList.get(0);
 	}
 
-	public List<Customer> findAllCustomers() {
-		return customerRepository.findByAgentId(agentService.getCurrentAgent().getId());
+	public List<Customer> findAllCustomers(Long agentId) {
+		return customerRepository.findByAgentId(agentId);
 	}
+
+	public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
 }
