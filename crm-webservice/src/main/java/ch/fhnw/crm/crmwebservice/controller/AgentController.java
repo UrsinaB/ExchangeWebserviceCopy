@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ch.fhnw.crm.crmwebservice.data.domain.Agent;
+import io.swagger.v3.oas.annotations.Hidden;
 
 @RestController
 @RequestMapping("/api/agent")
@@ -51,6 +52,7 @@ public class AgentController {
         return ResponseEntity.ok().build();
     }
 
+    @Hidden
     @RequestMapping(value = "/validate", method = {RequestMethod.GET, RequestMethod.HEAD})
     public ResponseEntity<Void> init() {
         return ResponseEntity.ok().build();
