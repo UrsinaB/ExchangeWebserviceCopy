@@ -8,10 +8,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @Entity
 public class Agent {
     @Id
 	@GeneratedValue
+	@Hidden
 	private Long id;
 	@NotEmpty(message = "Please provide a name.")
 	private String name;
@@ -23,6 +26,7 @@ public class Agent {
 	@JsonIgnore
 	private String role = "USER";
 	@Transient // will not be stored in DB
+	@Hidden
 	private String remember;
 	@OneToMany(mappedBy = "agent")
 	@JsonIgnore
