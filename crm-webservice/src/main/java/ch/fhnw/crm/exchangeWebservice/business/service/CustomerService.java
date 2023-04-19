@@ -1,11 +1,11 @@
-package ch.fhnw.crm.crmwebservice.business.service;
+package ch.fhnw.crm.exchangeWebservice.business.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import ch.fhnw.crm.crmwebservice.data.domain.Customer;
-import ch.fhnw.crm.crmwebservice.data.repository.CustomerRepository;
 
+import ch.fhnw.crm.exchangeWebservice.data.domain.Customer;
+import ch.fhnw.crm.exchangeWebservice.data.repository.CustomerRepository;
 import jakarta.validation.Valid;
 import java.util.List;
 

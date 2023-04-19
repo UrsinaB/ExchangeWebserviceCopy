@@ -1,9 +1,9 @@
-package ch.fhnw.crm.crmwebservice.data.repository;
-
-import ch.fhnw.crm.crmwebservice.data.domain.Agent;
+package ch.fhnw.crm.exchangeWebservice.data.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
 
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Long> {

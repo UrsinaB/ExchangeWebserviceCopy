@@ -1,8 +1,9 @@
-package ch.fhnw.crm.crmwebservice.data.repository;
+package ch.fhnw.crm.exchangeWebservice.data.repository;
 
-import ch.fhnw.crm.crmwebservice.data.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import ch.fhnw.crm.exchangeWebservice.data.domain.Customer;
 
 import java.util.List;
 

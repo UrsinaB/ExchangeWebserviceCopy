@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.controller;
+package ch.fhnw.crm.exchangeWebservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,9 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import ch.fhnw.crm.crmwebservice.business.service.CustomerService;
-import ch.fhnw.crm.crmwebservice.data.domain.Customer;
-
+import ch.fhnw.crm.exchangeWebservice.business.service.CustomerService;
+import ch.fhnw.crm.exchangeWebservice.data.domain.Customer;
 import jakarta.validation.ConstraintViolationException;
 
 import java.util.List;

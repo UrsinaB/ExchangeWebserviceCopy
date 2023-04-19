@@ -1,8 +1,10 @@
-package ch.fhnw.crm.crmwebservice.security.controller;
+package ch.fhnw.crm.exchangeWebservice.security.controller;
 
-import ch.fhnw.crm.crmwebservice.security.service.TokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import ch.fhnw.crm.exchangeWebservice.security.service.TokenService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

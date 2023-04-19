@@ -1,13 +1,13 @@
-package ch.fhnw.crm.crmwebservice;
+package ch.fhnw.crm.exchangeWebservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrmWebserviceApplication {
+public class exchangeWebserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrmWebserviceApplication.class, args);
+		SpringApplication.run(exchangeWebserviceApplication.class, args);
 	}
 
 }

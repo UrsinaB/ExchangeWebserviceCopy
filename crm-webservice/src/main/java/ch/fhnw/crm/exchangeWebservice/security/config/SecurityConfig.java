@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.security.config;
+package ch.fhnw.crm.exchangeWebservice.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
-import ch.fhnw.crm.crmwebservice.business.service.UserDetailsServiceImpl;
+import ch.fhnw.crm.exchangeWebservice.business.service.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Value;
 

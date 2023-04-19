@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.security.service;
+package ch.fhnw.crm.exchangeWebservice.security.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

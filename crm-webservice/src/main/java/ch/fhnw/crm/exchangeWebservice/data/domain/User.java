@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.data.domain;
+package ch.fhnw.crm.exchangeWebservice.data.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -11,26 +11,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Entity
-public class Agent {
+public class User {
     @Id
 	@GeneratedValue
 	@Hidden
 	private Long id;
-	@NotEmpty(message = "Please provide a name.")
-	private String name;
+	@NotEmpty(message = "Please provide a username.")
+	private String username;
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
-	@JsonIgnore
-	private String role = "USER";
 	@Transient // will not be stored in DB
 	@Hidden
 	private String remember;
-	@OneToMany(mappedBy = "agent")
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
-	private List<Customer> customers;
+	private List<Item> items;
+	@OneToMany(mappedBy = "user")
+	private List<Transaction> transactions;
 
 	public Long getId() {
 		return id;
@@ -40,12 +40,12 @@ public class Agent {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -64,12 +64,12 @@ public class Agent {
 		this.password = password;
 	}
 
-	public List<Customer> getCustomers() {
-		return customers;
+	public List<Item> getItems() {
+		return items;
 	}
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	public String getRemember() {
@@ -80,7 +80,5 @@ public class Agent {
 		this.remember = remember;
 	}
 
-	public String getRole() {
-		return role;
-	}
+	
 }

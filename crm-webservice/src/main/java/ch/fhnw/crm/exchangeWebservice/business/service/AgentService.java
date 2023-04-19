@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.business.service;
+package ch.fhnw.crm.exchangeWebservice.business.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import ch.fhnw.crm.crmwebservice.data.domain.Agent;
-import ch.fhnw.crm.crmwebservice.data.repository.AgentRepository;
 
+import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
+import ch.fhnw.crm.exchangeWebservice.data.repository.AgentRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 

@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.controller;
+package ch.fhnw.crm.exchangeWebservice.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

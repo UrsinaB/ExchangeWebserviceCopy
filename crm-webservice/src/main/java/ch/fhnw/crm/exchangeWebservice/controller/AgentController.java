@@ -1,6 +1,4 @@
-package ch.fhnw.crm.crmwebservice.controller;
-
-import ch.fhnw.crm.crmwebservice.business.service.AgentService;
+package ch.fhnw.crm.exchangeWebservice.controller;
 
 import java.util.List;
 
@@ -10,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ch.fhnw.crm.crmwebservice.data.domain.Agent;
+
+import ch.fhnw.crm.exchangeWebservice.business.service.AgentService;
+import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @RestController

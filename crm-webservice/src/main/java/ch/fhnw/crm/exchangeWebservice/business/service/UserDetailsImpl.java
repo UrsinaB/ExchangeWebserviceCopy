@@ -1,4 +1,4 @@
-package ch.fhnw.crm.crmwebservice.business.service;
+package ch.fhnw.crm.exchangeWebservice.business.service;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import ch.fhnw.crm.crmwebservice.data.domain.Agent;
+import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
 
 public class UserDetailsImpl implements UserDetails {
     private String username;
