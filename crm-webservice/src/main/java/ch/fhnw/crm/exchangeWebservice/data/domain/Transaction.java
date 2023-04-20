@@ -27,11 +27,11 @@ public class Transaction {
     private Item transactedItem;
 
     @OneToOne(mappedBy = "transaction")
-    @JoinColumn(name ="UserId", nullable = false)
+    @JoinColumn(name ="providingUserId", nullable = false)
     private User providinguser;
 
     @OneToOne(mappedBy = "transaction")
-    @JoinColumn(name ="UserId", nullable = false)
+    @JoinColumn(name ="receivingUserId", nullable = false)
     private User receivinguser;
 
     public Transaction() {

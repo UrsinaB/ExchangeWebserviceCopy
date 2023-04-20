@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @Entity
 public class User {
     @Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Hidden
 	private Long id;
 	@NotEmpty(message = "Please provide a username.")

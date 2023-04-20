@@ -30,13 +30,17 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 
-	@ManyToOne
-	@JsonIgnore
+	@OneToMany
+	@JoinColumn(name = "categoryId")
 	private ItemCategory itemCategory;
 
 	@ManyToOne
-	@JsonIgnore
+	@JoinColumn(name = "userId")
 	private User user;
+
+	@OneToOne
+	@JoinColumn(name = "transactionId")
+	private Transaction transaction;
 
 	//constructors, getters and setters
 

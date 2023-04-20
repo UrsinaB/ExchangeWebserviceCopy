@@ -1,9 +1,12 @@
 package ch.fhnw.crm.exchangeWebservice.data.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -13,10 +16,13 @@ public class ItemCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoryId;
+    private Long categoryId;
 
     @NotEmpty(message = "Please provide a name for your item category")
     private String categoryName;
+
+    @OneToMany(mappedBy = "itemCategory")
+    private List<Item> items;
 
     public ItemCategory() {
     }
