@@ -16,19 +16,25 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Hidden
 	private Long id;
+
 	@NotEmpty(message = "Please provide a username.")
 	private String username;
+
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
+
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
+
 	@Transient // will not be stored in DB
 	@Hidden
 	private String remember;
+
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Item> items;
+	
 	@OneToMany(mappedBy = "user")
 	private List<Transaction> transactions;
 
