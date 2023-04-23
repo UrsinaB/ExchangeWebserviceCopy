@@ -12,6 +12,12 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
+	//find a specific item by title and userid
+	Item findByTitleAndUser_Id(String title, Long userId);
+
+	//find a specific item belonging to a specific user
+	Item findByUSer(User user);
+	
 	//find all items belonging to a specific user
 	List<Item> findByUser(User user);
 	List<Item> findByUser_Id(Long userId);

@@ -12,9 +12,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByUsernameAndPassword(String username, String password);
 	User findByEmailAndIdAndNameNot(String email, Long userId, String usernames);
 	User findByUsername(String username);
-	User findByUsernameAndIdNot(String username, Long userId);
-	User findByItem_Id(Long itemId);
+	static User findByUsernameAndIdNot(String username, Long userId) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'findByUsernameAndIdNot'");
+	}
+	User findByItemId(Long itemId);
 	User findByTransaction_Id(Long transactionId);
+	static User findByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'findByUserId'");
+	}
 
 	// Delete user by username
 

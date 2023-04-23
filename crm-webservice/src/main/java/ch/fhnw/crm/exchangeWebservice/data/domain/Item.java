@@ -24,7 +24,7 @@ public class Item {
     @Id
 	@GeneratedValue
 	@Hidden
-	private Long id;
+	private Long itemId;
 
 	@NotEmpty(message = "Please provide a title for your item")
 	private String title;
@@ -56,12 +56,12 @@ public class Item {
 
 	//constructors, getters and setters
 
-	public Long getId() {
-		return id;
+	public Long getItemId() {
+		return itemId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setItemId(Long itemId) {
+	  this.itemId = itemId;
 	}
 
 	public String getTitle() {

@@ -15,7 +15,7 @@ public class User {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Hidden
-	private Long id;
+	private Long userId;
 
 	@NotEmpty(message = "Please provide a username.")
 	private String username;
@@ -38,12 +38,12 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Transaction> transactions;
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -85,6 +85,9 @@ public class User {
 	public void setRemember(String remember) {
 		this.remember = remember;
 	}
+
+    public void setUsername(String username2) {
+    }
 
 	
 }

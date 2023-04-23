@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import ch.fhnw.crm.exchangeWebservice.business.service.CustomerService;
+import ch.fhnw.crm.exchangeWebservice.business.service.ItemService;
 import ch.fhnw.crm.exchangeWebservice.data.domain.Customer;
 import jakarta.validation.ConstraintViolationException;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private ItemService customerService;
 
     @PostMapping(path = "/customer/{agentId}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer, @PathVariable(value = "agentId") String agentId) {
