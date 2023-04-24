@@ -44,7 +44,7 @@ public class Item {
 
 	@OneToMany
 	@JoinColumn(name = "categoryId")
-	private List <ItemCategory> itemCategory;
+	private ItemCategory itemCategory;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -60,7 +60,7 @@ public class Item {
 		return itemId;
 	}
 
-	public void setItemId(Long itemId) {
+	public void setItemId(long l) {
 	  this.itemId = itemId;
 	}
 
@@ -88,5 +88,43 @@ public class Item {
 		this.user = user;
 	}
 
+	public Date getListingDate() {
+		return listingDate;
+	}
+
+	public void setListingDate(String string) {
+		this.listingDate = listingDate;
+	}
+
+	public ItemStatus getItemStatus() {
+		return itemStatus;
+	}
+
+	public void setItemStatus(ItemStatus itemStatus) {
+		this.itemStatus = itemStatus;
+	}
+
+	public ItemCategory getItemCategory() {
+		return itemCategory;
+	}
+
+	public void setItemCategory(ItemCategory itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+
+	public Item() {
+		this.listingDate = Date.valueOf(LocalDate.now());
+		this.itemStatus = ItemStatus.AVAILABLE;
+	}
+
+	}
+
 	
-}
