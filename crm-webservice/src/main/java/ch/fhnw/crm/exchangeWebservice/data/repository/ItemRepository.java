@@ -19,15 +19,14 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	Item findByUSer(User user);
 	
 	//find all items belonging to a specific user
-	List<Item> findByUser(User user);
+	List<Item> findByUser(long userId);
 	List<Item> findByUser_Id(Long userId);
 	List<Item> findByUsername(String username);
 
 	//find all items belonging to a specific category
-	List<Item> findByItemCategory(ItemCategory itemCategory);
 	List<Item> findByCategoryName(String categoryName);
 
-	//find all times listed on a certain date
+	//find all item listed on a certain date
 	List<Item> findByListingDate(String listingDate);
 
 	//find all items with a specific status
@@ -43,6 +42,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	//Find all items with a transaction
 	List<Item> findByTransactionIsNotNull();
 
+	// Count all items with a transaction
+
+	long countByTransactionIsNotNull();
+
 	//find all items
 	List<Item> findAll();
 
@@ -53,13 +56,15 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	void deleteByTitle(String title);
 
 	//Delete item by title and username
-	void deleteByTitleAndUser_Username(String title, String username);
+	void deleteByTitleAndUsername(String title, String username);
 
 	//Delete items that have a transaction by username
 	void deleteByTransactionIsNotNullAndUser_Username(String username);
 
 	//Delete all items of a specific user
 	void deleteByUser_Username(String username);
+
+	List<Item> findByTitleContainingOrDescriptionContainingIgnoreCase(String k, String k2);
 
 	
 }

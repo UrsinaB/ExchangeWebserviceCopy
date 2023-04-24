@@ -9,49 +9,46 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import ch.fhnw.crm.exchangeWebservice.business.service.AgentService;
-import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
+import ch.fhnw.crm.exchangeWebservice.business.service.UserService;
+import ch.fhnw.crm.exchangeWebservice.data.domain.User;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @RestController
-@RequestMapping("/api/agent")
-public class AgentController {
+@RequestMapping("/api/user")
+public class UserController {
 
     @Autowired
-    private AgentService agentService;
-
+    private UserService UserService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> postRegister(@RequestBody Agent agent) {
+    public ResponseEntity<Void> postRegister(@RequestBody User user) {
         try {
-            agentService.saveAgent(agent);
+            UserService.saveUser(user);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/allagents")
-    public List<Agent> all() {
-       return agentService.getAllAgents();
+    // get current user by user id
+    @GetMapping("/profile/{userId}")
+    public @ResponseBody User getProfile(@PathVariable(value = "userId") String userId) {
+        return UserService.getCurrentUserById(Long.parseLong(userId));
     }
 
-    @GetMapping("/profile/{agentId}")
-    public @ResponseBody Agent getProfile(@PathVariable(value = "agentId") String agentId) {
-        return agentService.getCurrentAgent(Long.parseLong(agentId));
-    } 
-
-    @PutMapping("/profile/{agentId}")
-    public ResponseEntity<Void> putProfile(@RequestBody Agent agent, @PathVariable(value = "agentId") String agentId) {
+   // edit current user by user id
+    @PutMapping("/profile/{userId}")
+    public ResponseEntity<Void> putProfile(@RequestBody User user, @PathVariable(value = "userId") String userId) {
         try {
-            agent.setId(Long.parseLong(agentId));
-            agentService.saveAgent(agent);
+            user.setUserId(Long.parseLong(userId));
+            UserService.saveUser(user);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
         return ResponseEntity.ok().build();
     }
 
+  
     @Hidden
     @RequestMapping(value = "/validate", method = {RequestMethod.GET, RequestMethod.HEAD})
     public ResponseEntity<Void> init() {

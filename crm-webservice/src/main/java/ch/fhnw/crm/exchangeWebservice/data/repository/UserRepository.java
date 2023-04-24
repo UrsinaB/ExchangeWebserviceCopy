@@ -8,10 +8,10 @@ import ch.fhnw.crm.exchangeWebservice.data.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	User findByEmail(String email);
+	org.springframework.security.core.userdetails.User findByEmail(String email);
 	User findByUsernameAndPassword(String username, String password);
 	User findByEmailAndIdAndNameNot(String email, Long userId, String usernames);
-	User findByUsername(String username);
+	org.springframework.security.core.userdetails.User findByUsername(String username);
 	static User findByUsernameAndIdNot(String username, Long userId) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'findByUsernameAndIdNot'");

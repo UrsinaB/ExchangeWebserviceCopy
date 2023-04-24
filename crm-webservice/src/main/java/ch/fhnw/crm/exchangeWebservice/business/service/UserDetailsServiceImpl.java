@@ -7,8 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import ch.fhnw.crm.exchangeWebservice.data.domain.Agent;
-import ch.fhnw.crm.exchangeWebservice.data.repository.AgentRepository;
+import ch.fhnw.crm.exchangeWebservice.data.repository.UserRepository;
 
 
 
@@ -16,21 +15,20 @@ import ch.fhnw.crm.exchangeWebservice.data.repository.AgentRepository;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AgentRepository agentRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Agent agent = agentRepository.findByEmail(username);
+       User user = userRepository.findByUsername(username);
         
-        if (agent == null) {
+        if (user == null) {
             throw new UsernameNotFoundException(username);
         }
         
-        UserDetails user = User.builder()
+        UserDetails userDetails = User.builder()
                                 .username(username)
-                                .password(agent.getPassword())
-                                .authorities("READ","ROLE_" + agent.getRole())
+                                .password(user.getPassword())
                                 .build();
 
         return user;
