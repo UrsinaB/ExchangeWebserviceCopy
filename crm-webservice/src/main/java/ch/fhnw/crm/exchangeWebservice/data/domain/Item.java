@@ -42,13 +42,15 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private ItemCategory itemCategory;
 
+	// one item belongs to one user
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
+
 
 	@OneToOne
 	@JoinColumn(name = "transactionId")
@@ -60,7 +62,7 @@ public class Item {
 		return itemId;
 	}
 
-	public void setItemId(long l) {
+	public void setItemId(Long itemId) {
 	  this.itemId = itemId;
 	}
 
@@ -105,7 +107,7 @@ public class Item {
 	}
 
 	public ItemCategory getItemCategory() {
-		return itemCategory;
+		return getItemCategory();
 	}
 
 	public void setItemCategory(ItemCategory itemCategory) {

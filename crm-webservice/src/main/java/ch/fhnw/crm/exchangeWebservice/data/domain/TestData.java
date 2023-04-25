@@ -45,7 +45,7 @@ public class TestData {
 
     public static User createUser() {
         User user = new User();
-        user.setUserId(1);
+        user.setUserId(null);
         user.setUsername("John");
         user.setPassword("123");
         user.setEmail("John84@tbk.com");
@@ -57,7 +57,7 @@ public class TestData {
 
     public static User createUser2() {
         User user = new User();
-        user.setUserId(2);
+       user.setUserId(null);
         user.setUsername("Max");
         user.setPassword("1223");
         user.setEmail("MaxMueller@dkak.ch");
@@ -69,7 +69,7 @@ public class TestData {
     // create a new item
     public static Item createItem() {
         Item item = new Item();
-        item.setItemId(1);
+        item.setItemId(null);
         item.setTitle("Bike");
         item.setDescription("A nice bike");
         item.setListingDate("2021-05-05");
@@ -85,7 +85,7 @@ public class TestData {
 
     public static Item createItem2() {
         Item item = new Item();
-        item.setItemId(2);
+        item.setItemId(null);
         item.setTitle("Shirt");
         item.setDescription("A nice shirt");
         item.setListingDate("2021-05-05");

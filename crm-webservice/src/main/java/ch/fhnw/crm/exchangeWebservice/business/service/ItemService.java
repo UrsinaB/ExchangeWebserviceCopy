@@ -26,7 +26,7 @@ public class ItemService {
 
 	public Item saveItem(@Valid Item item) throws Exception {
 		if (item.getItemId() == null) {
-			if (itemRepository.findByTitleAndUser_Id (item.getTitle(), item.getItemId()) != null) {
+			if (itemRepository.findByTitleAndUserId (item.getTitle(), item.getItemId()) != null) {
 				throw new Exception("Item title " + item.getTitle() +  item.getItemId() + " already assigned another item.");
 			}
 		} else if (itemRepository.findByUSer(item.getUser()) != null) {
@@ -59,7 +59,7 @@ public class ItemService {
 		if (item.getItemId() == null) {
 			throw new Exception("Item id is null");
 		}
-		if (itemRepository.findByTitleAndUser_Id(item.getTitle(), item.getItemId()) != null) {
+		if (itemRepository.findByTitleAndUserId(item.getTitle(), item.getItemId()) != null) {
 			throw new Exception("Item title " + item.getTitle() + " already assigned another item.");
 		}
 		return itemRepository.save(item);
@@ -82,13 +82,13 @@ public class ItemService {
 		// get all items belonging to one specific user with item status AVAILABLE
 
 		public List<Item> getItemByUserAndItemStatus(User user) {
-			return itemRepository.findByItemStatusAndUser_Id(ItemStatus.AVAILABLE, user.getUserId());
+			return itemRepository.findByItemStatusAndUserId(ItemStatus.AVAILABLE, user.getUserId());
 		}
 
 		// get all items belonging to one specific user with item status NOTAVAILABLE
 
 		public List<Item> getItemByUserAndItemStatusNotAvailable(User user) {
-			return itemRepository.findByItemStatusAndUser_Id(ItemStatus.NOTAVAILABLE, user.getUserId());
+			return itemRepository.findByItemStatusAndUserId(ItemStatus.NOTAVAILABLE, user.getUserId());
 		}
 
 		// search for items by title

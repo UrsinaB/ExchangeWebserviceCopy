@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -30,12 +31,14 @@ public class Transaction {
     @JoinColumn(name = "itemId", nullable = false)
     private Item transactedItem;
 
-    @OneToOne(mappedBy = "transaction")
-    @JoinColumn(name ="providingUserId", nullable = false)
+    // one Transaction has one providing user and one receiving user
+
+    @ManyToOne
+    @JoinColumn(name ="providinguserId", nullable = false)
     private User providinguser;
 
-    @OneToOne(mappedBy = "transaction")
-    @JoinColumn(name ="receivingUserId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name ="receivinguserId", nullable = false)
     private User receivinguser;
 
     public Transaction() {

@@ -13,15 +13,15 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
 	//find a specific item by title and userid
-	Item findByTitleAndUser_Id(String title, Long userId);
+	Item findByTitleAndUserId(String title, long userId);
 
 	//find a specific item belonging to a specific user
 	Item findByUSer(User user);
 	
 	//find all items belonging to a specific user
 	List<Item> findByUser(long userId);
-	List<Item> findByUser_Id(Long userId);
-	List<Item> findByUsername(String username);
+	List<Item> findByUserId(long userId);
+	
 
 	//find all items belonging to a specific category
 	List<Item> findByCategoryName(String categoryName);
@@ -31,7 +31,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 	//find all items with a specific status
 	List<Item> findByItemStatus(ItemStatus itemStatus);
-	List<Item> findByItemStatusAndUser_Id(ItemStatus itemStatus, Long userId);
+	List<Item> findByItemStatusAndUserId(ItemStatus itemStatus, Long userId);
  
 	// Find all items with a title containing the given search string, sorted by listing date in ascending order
 	List<Item> findByTitleContainingOrderByListingDateAsc(String searchString);

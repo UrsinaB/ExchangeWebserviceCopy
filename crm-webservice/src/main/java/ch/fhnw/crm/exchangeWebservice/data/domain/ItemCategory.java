@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -21,7 +22,7 @@ public class ItemCategory {
     @NotEmpty(message = "Please provide a name for your item category")
     private String categoryName;
 
-    @OneToMany(mappedBy = "itemCategory")
+   @OneToMany(mappedBy = "itemCategory")
     private List<Item> items;
 
     public ItemCategory() {
