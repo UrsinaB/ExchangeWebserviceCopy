@@ -5,11 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import ch.fhnw.crm.exchangeWebservice.data.domain.Item;
+import ch.fhnw.crm.exchangeWebservice.data.domain.ItemCategory;
 import ch.fhnw.crm.exchangeWebservice.data.domain.ItemStatus;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
+import ch.fhnw.crm.exchangeWebservice.data.repository.ItemCategoryRepository;
 import ch.fhnw.crm.exchangeWebservice.data.repository.ItemRepository;
 import jakarta.validation.Valid;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +21,16 @@ import java.util.List;
 public class ItemService {
     @Autowired
 	private ItemRepository itemRepository;
-	@Autowired
-	private UserService userService;
 
+	
 	// save new item
-
-
 	public Item saveItem(@Valid Item item) throws Exception {
 		if (item.getItemId() == null) {
-			if (itemRepository.findByTitleAndUserId (item.getTitle(), item.getItemId()) != null) {
-				throw new Exception("Item title " + item.getTitle() +  item.getItemId() + " already assigned another item.");
+			if (itemRepository.findByItemTitleAndUser(item.getItemTitle(), item.getItemId()) != null) {
+				throw new Exception("Item title " + item.getItemTitle() +  item.getItemId() + " already assigned another item.");
 			}
-		} else if (itemRepository.findByUSer(item.getUser()) != null) {
-			throw new Exception("Item name " + item.getTitle() + " already assigned another user.");
+		} else if (itemRepository.findByUser(item.getUser()) != null) {
+			throw new Exception("Item name " + item.getItemTitle() + " already assigned another user.");
 		}
 		return itemRepository.save(item);
 	}
@@ -49,8 +49,13 @@ public class ItemService {
 
 	// get item by user
 
-	public List<Item> getItemByUser(long userId) {
-		return itemRepository.findByUser(userId);
+	public List<Item> getItemByUser(User user) {
+		return itemRepository.findByUser(user);
+	}
+
+	//get all items by item category
+	public List <Item> getAllItemsByItemCategory(ItemCategory itemCategory) {
+		return itemRepository.findByItemCategory(itemCategory);
 	}
 
 	// update an item
@@ -59,8 +64,8 @@ public class ItemService {
 		if (item.getItemId() == null) {
 			throw new Exception("Item id is null");
 		}
-		if (itemRepository.findByTitleAndUserId(item.getTitle(), item.getItemId()) != null) {
-			throw new Exception("Item title " + item.getTitle() + " already assigned another item.");
+		if (itemRepository.findByItemTitleAndUser(item.getItemTitle(), item.getItemId()) != null) {
+			throw new Exception("Item title " + item.getItemTitle() + " already assigned another item.");
 		}
 		return itemRepository.save(item);
 
@@ -72,23 +77,18 @@ public class ItemService {
 			itemRepository.deleteById(itemId);
 			return null;
 		}
-
-		// get items by item category
-
-		public List<Item> getItemByItemCategory(String itemCategoryName) {
-			return itemRepository.findByCategoryName(itemCategoryName);
-		}
+	
 
 		// get all items belonging to one specific user with item status AVAILABLE
 
-		public List<Item> getItemByUserAndItemStatus(User user) {
-			return itemRepository.findByItemStatusAndUserId(ItemStatus.AVAILABLE, user.getUserId());
+		public List<Item> getItemByUserAndItemStatus(User user, ItemStatus available) {
+			return itemRepository.findByItemStatusAndUser(ItemStatus.AVAILABLE, user);
 		}
 
 		// get all items belonging to one specific user with item status NOTAVAILABLE
 
 		public List<Item> getItemByUserAndItemStatusNotAvailable(User user) {
-			return itemRepository.findByItemStatusAndUserId(ItemStatus.NOTAVAILABLE, user.getUserId());
+			return itemRepository.findByItemStatusAndUser(ItemStatus.NOTAVAILABLE, user);
 		}
 
 		// search for items by title
@@ -111,11 +111,7 @@ public class ItemService {
 			return items;
 		}
 
-		// delete items by itemtitle and user
 
-		public void deleteItemByTitleAndUserName(String title, String Username) {
-			itemRepository.deleteByTitleAndUsername(title, Username);
-		}
 
 		// count all items on the platform
 
@@ -137,8 +133,12 @@ public class ItemService {
 
 		//find all item listed on a certain date
 
-		public List<Item> findAllItemsListedOnDate(String date) {
-			return itemRepository.findByListingDate(date);
+		public List<Item> findAllItemsListedOnDate(Date date) {
+			return itemRepository.findByItemListingDate(date);
+		}
+
+		public List<Item> getItemByUser(Long long1) {
+			return null;
 		}
 	
 	}

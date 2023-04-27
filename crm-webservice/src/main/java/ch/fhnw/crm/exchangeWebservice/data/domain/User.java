@@ -37,7 +37,7 @@ public class User {
 	@JsonIgnore
 	private List<Item> items;
 
-	// one user can have many transactions as profiding user
+	// one user can have many transactions as providing user
 	@OneToMany(mappedBy = "providinguser")
 	@JsonIgnore
 	private List<Transaction> providingTransactions;
@@ -47,7 +47,16 @@ public class User {
 	@JsonIgnore
 	private List<Transaction> receivingTransactions;
 	
-	
+    public User() {
+	}
+
+	public User(String username, String email, String password, String remember) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.remember = remember;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}

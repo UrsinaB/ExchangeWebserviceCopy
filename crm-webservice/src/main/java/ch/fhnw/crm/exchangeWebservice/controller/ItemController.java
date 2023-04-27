@@ -59,7 +59,7 @@ public class ItemController {
 
     @GetMapping(path = "/item/{userId}", produces = "application/json")
     public List<Item> getItems(@PathVariable(value = "userId") String userId) {
-        return ItemService.getItemByUser(Long.parseLong(userId));
+        return ItemService.getItemByUser(userId == null ? null : Long.parseLong(userId));
     }
 
     //GET method to retrieve a specific item from the database

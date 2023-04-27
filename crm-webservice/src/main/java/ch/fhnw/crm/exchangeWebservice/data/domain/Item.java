@@ -10,10 +10,12 @@ import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import ch.fhnw.crm.exchangeWebservice.data.domain.*;
 
 // declaring a database relation item (the item to be exchanged)
 // @Table is used to specify the name of the table in the database
 
+	// save new item
 @Entity
 @Table(name = "items")
 public class Item {
@@ -27,23 +29,23 @@ public class Item {
 	private Long itemId;
 
 	@NotEmpty(message = "Please provide a title for your item")
-	private String title;
+	private String itemTitle;
 
 	@NotEmpty(message ="Please provide a description for your item")
 	@Column(length = 1000)
-	private String description;
+	private String itemDescription;
 
 	// @Temproal is used to specify the date format
 
-	@Column(name ="ListingDate")
+	@Column(name ="ItemListingDate")
 	@Temporal(TemporalType.DATE)
-	private Date listingDate;
+	private Date itemListingDate;
 
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "categoryId", nullable = false)
 	private ItemCategory itemCategory;
 
 	// one item belongs to one user
@@ -51,7 +53,8 @@ public class Item {
 	@JoinColumn(name = "userId")
 	private User user;
 
-
+	// one item can have one transaction
+	
 	@OneToOne
 	@JoinColumn(name = "transactionId")
 	private Transaction transaction;
@@ -66,36 +69,36 @@ public class Item {
 	  this.itemId = itemId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getItemTitle() {
+		return itemTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setItemTitle(String itemTitle) {
+		this.itemTitle = itemTitle;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getItemDescription() {
+		return itemDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
 	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User user){
+	this.user = user;
 	}
 
-	public Date getListingDate() {
-		return listingDate;
+	public Date getItemListingDate() {
+		return itemListingDate;
 	}
 
-	public void setListingDate(String string) {
-		this.listingDate = listingDate;
+	public void setItemListingDate(Date itemListingDate) {
+		this.itemListingDate = itemListingDate;
 	}
 
 	public ItemStatus getItemStatus() {
@@ -107,7 +110,7 @@ public class Item {
 	}
 
 	public ItemCategory getItemCategory() {
-		return getItemCategory();
+		return itemCategory;
 	}
 
 	public void setItemCategory(ItemCategory itemCategory) {
@@ -122,11 +125,6 @@ public class Item {
 		this.transaction = transaction;
 	}
 
-	public Item() {
-		this.listingDate = Date.valueOf(LocalDate.now());
-		this.itemStatus = ItemStatus.AVAILABLE;
-	}
-
-	}
+}
 
 	

@@ -5,31 +5,30 @@ import org.springframework.stereotype.Repository;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
 
 // declaring a database relation user (the user of the application)
-
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	org.springframework.security.core.userdetails.User findByEmail(String email);
+
+	// Find user by username
+	User findByUsername(String username);
 	User findByUsernameAndPassword(String username, String password);
-	User findByEmailAndIdAndNameNot(String email, Long userId, String usernames);
-	org.springframework.security.core.userdetails.User findByUsername(String username);
-	static User findByUsernameAndIdNot(String username, Long userId) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'findByUsernameAndIdNot'");
-	}
+	User findByEmail(String email);
 	User findByItemId(Long itemId);
-	User findByTransaction_Id(Long transactionId);
-	static User findByUserId(Long userId) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'findByUserId'");
-	}
+	User findByTransactionId(Long transactionId);
+	User findByProvidingTransactionsId(Long transactionId);
+	User findByReceivingTransactionsId(Long transactionId);
+	User findByProvidingTransactionsIdAndUsername(Long transactionId, String username);
+	User findByEmailAndIdAndNameNot(String email, Long userId, String username);
+	User  findByUserId(Long userId);
 
 	// Delete user by username
 
 	void deleteByUsername(String username);
 
 	// Count number of users
-
 	long count();
+
+
+    
 
 	
 	

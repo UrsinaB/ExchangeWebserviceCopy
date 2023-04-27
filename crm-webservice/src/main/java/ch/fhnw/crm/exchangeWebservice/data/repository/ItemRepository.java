@@ -7,31 +7,29 @@ import ch.fhnw.crm.exchangeWebservice.data.domain.ItemCategory;
 import ch.fhnw.crm.exchangeWebservice.data.domain.ItemStatus;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-	//find a specific item by title and userid
-	Item findByTitleAndUserId(String title, long userId);
+	//find a specific item by title and acutal User
+	Item findByItemTitleAndUser(String itemTitle, Long long1);
 
 	//find a specific item belonging to a specific user
-	Item findByUSer(User user);
-	
-	//find all items belonging to a specific user
-	List<Item> findByUser(long userId);
-	List<Item> findByUserId(long userId);
-	
+	Item findByItemIdAndUser(Long itemId, User user);
 
-	//find all items belonging to a specific category
-	List<Item> findByCategoryName(String categoryName);
+	//find all items belonging to a specific user
+	List<Item> findByUser(User user);
 
 	//find all item listed on a certain date
-	List<Item> findByListingDate(String listingDate);
+	List<Item> findByItemListingDate(Date itemListingDate);
 
 	//find all items with a specific status
 	List<Item> findByItemStatus(ItemStatus itemStatus);
-	List<Item> findByItemStatusAndUserId(ItemStatus itemStatus, Long userId);
+
+	//Find all items with a specific status and belonging to a specific user
+	List<Item> findByItemStatusAndUser(ItemStatus itemStatus, User user);
  
 	// Find all items with a title containing the given search string, sorted by listing date in ascending order
 	List<Item> findByTitleContainingOrderByListingDateAsc(String searchString);
@@ -43,7 +41,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	List<Item> findByTransactionIsNotNull();
 
 	// Count all items with a transaction
-
 	long countByTransactionIsNotNull();
 
 	//find all items
@@ -53,18 +50,17 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	long count();
 
 	//Delete item by title
-	void deleteByTitle(String title);
+	void deleteByItemTitle(String itemTitle);
 
-	//Delete item by title and username
-	void deleteByTitleAndUsername(String title, String username);
-
-	//Delete items that have a transaction by username
-	void deleteByTransactionIsNotNullAndUser_Username(String username);
+	//Delete items that have a transaction and USer
+	void deleteByTransactionIsNotNullAndUser(User user);
 
 	//Delete all items of a specific user
 	void deleteByUser_Username(String username);
 
 	List<Item> findByTitleContainingOrDescriptionContainingIgnoreCase(String k, String k2);
+
+	List<Item> findByItemCategory(ItemCategory itemCategory);
 
 	
 }
