@@ -20,8 +20,6 @@ public class UserService {
     @Autowired
     Validator validator;
     
-    @Autowired
-    PasswordEncoder passwordEncoder;
     
 
     public void saveUser(@Valid User user) throws Exception {
@@ -29,10 +27,9 @@ public class UserService {
             if (userRepository.findByEmail(user.getEmail()) != null) {
                 throw new Exception("Email address " + user.getEmail() + " already assigned another user.");
             }
-        } else if (userRepository.findByEmailAndIdAndNameNot(user.getEmail(), user.getUserId(), user.getUsername()) != null) {
+        } else if (userRepository.findByEmailAndUserIdAndNameNot(user.getEmail(), user.getUserId(), user.getUsername()) != null) {
             throw new Exception("Email address " + user.getEmail() + " and name " + user.getUsername() + " already assigned another user.");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -48,6 +45,11 @@ public class UserService {
 
     public User getCurrentUserById(long parseLong) {
         return null;
+    }
+
+    // find user by item id
+    public User findByItemId(Long itemId) {
+        return userRepository.findByItemId(itemId);
     }
 
 

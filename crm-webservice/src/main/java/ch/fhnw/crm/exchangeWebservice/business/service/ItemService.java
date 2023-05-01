@@ -94,7 +94,7 @@ public class ItemService {
 		// search for items by title
 
 		public List<Item> searchItemByTitle(String searchString) {
-			return itemRepository.findByTitleContainingOrderByListingDateAsc(searchString);
+			return itemRepository.findByItemTitleContainingIgnoreCaseOrderByItemListingDateAsc(searchString);
 		}
 
 		// search for items by title and description using keywords
@@ -104,7 +104,7 @@ public class ItemService {
 			List<Item> items = new ArrayList <> ();
 			String[] keywords =keyword.split("\\s+");
 			for (String k : keywords) {
-				List<Item> itemList = itemRepository.findByTitleContainingOrDescriptionContainingIgnoreCase (k, k);
+				List<Item> itemList = itemRepository.findByItemTitleContainingOrItemDescriptionContainingIgnoreCase (k, k);
 				items.addAll(itemList);
 			}
 

@@ -1,7 +1,6 @@
 package ch.fhnw.crm.exchangeWebservice.data.domain;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -60,6 +58,22 @@ public class Transaction {
 
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public User getProvidingUser() {
+        return providinguser;
+    }
+
+    public void setProvidingUser(User providinguser) {
+        this.providinguser = providinguser;
+    }
+
+    public User getReceivingUser() {
+        return receivinguser;
+    }
+
+    public void setReceivingUser(User receivinguser) {
+        this.receivinguser = receivinguser;
     }
 
     
