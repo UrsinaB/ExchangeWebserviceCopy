@@ -1,6 +1,5 @@
 package ch.fhnw.crm.exchangeWebservice.business.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class UserDetailsImpl implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public UserDetailsImpl(User user) {
-        username= user.getUsername();
+        username=user.getUsername();
         password=user.getPassword();
-        authorities= new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
     @Override

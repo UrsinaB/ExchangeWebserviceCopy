@@ -1,6 +1,5 @@
 package ch.fhnw.crm.exchangeWebservice.business.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.stereotype.Service;
@@ -20,6 +19,8 @@ public class UserService {
     @Autowired
     Validator validator;
     
+    @Autowired
+    PasswordEncoder passwordEncoder;
     
 
     public void saveUser(@Valid User user) throws Exception {
@@ -30,6 +31,7 @@ public class UserService {
         } else if (userRepository.findByEmailAndUserIdAndNameNot(user.getEmail(), user.getUserId(), user.getUsername()) != null) {
             throw new Exception("Email address " + user.getEmail() + " and name " + user.getUsername() + " already assigned another user.");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -47,19 +49,9 @@ public class UserService {
         return null;
     }
 
-    // find user by item id
-    public User findByItemId(Long itemId) {
-        return userRepository.findByItemId(itemId);
-    }
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+

@@ -1,5 +1,7 @@
 package ch.fhnw.crm.exchangeWebservice.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,12 @@ public class HomeController {
 
         return "Hey there, welcome to CRM Webservice";
     }
+
+    @GetMapping("/safe")
+    public ResponseEntity<String> showSafeContent() {
+        return new ResponseEntity<>("Only a token bearer can see this", HttpStatus.OK);
+    }
+
     
        
     }

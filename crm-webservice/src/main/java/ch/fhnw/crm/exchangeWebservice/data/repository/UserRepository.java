@@ -47,6 +47,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u FROM User u WHERE u.email = :email AND u.userId != :userId AND u.username <> :username")
 	User findByEmailAndUserIdAndNameNot(String email, Long userId, String username);
 
+	
 
     
 

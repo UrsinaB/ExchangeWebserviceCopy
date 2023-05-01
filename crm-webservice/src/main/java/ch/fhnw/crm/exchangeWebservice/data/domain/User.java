@@ -108,5 +108,9 @@ public class User {
     public void setUsername(String username2) {
     }
 
+    public String getRole() {
+        return null;
+    }
+
 	
 }
