@@ -29,9 +29,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
-
-import ch.fhnw.crm.exchangeWebservice.business.service.UserDetailsServiceImpl;
+import com.nimbusds.jose.proc.SecurityContext;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -45,22 +45,26 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        /*return new InMemoryUserDetailsManager(
-            User.withUsername("user")
-                    .password("{noop}password")
+        return new InMemoryUserDetailsManager(
+                org.springframework.security.core.userdetails.User.withUsername("user")
+                .password("{noop}password")
                     .authorities("READ","ROLE_USER")
-                    .build());*/
-        
-        return new UserDetailsServiceImpl(); 
+                    .build(),
+                org.springframework.security.core.userdetails.User.withUsername("user2")
+                .password("{noop}password")
+                    .authorities("READ","ROLE_USER")
+                    .build());
+ 
+    
     }
 
 
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/api/agent/register",
+                        .requestMatchers("/api/user/register",
                                                     "/",
                                                     "/swagger-ui.html",
                                                     "/v3/api-docs/**",
