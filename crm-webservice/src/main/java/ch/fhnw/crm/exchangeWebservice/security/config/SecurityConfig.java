@@ -30,6 +30,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.proc.SecurityContext;
+
+import ch.fhnw.crm.exchangeWebservice.business.service.UserDetailsServiceImpl;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -42,21 +44,24 @@ public class SecurityConfig {
 	@Value("${jwt.key}")
     private String jwtKey;
 
-
+    // bean that replaces the default implementation of UserDetailsService
     @Bean
     public UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(
-                org.springframework.security.core.userdetails.User.withUsername("user")
-                .password("{noop}password")
+                org.springframework.security.core.userdetails.User.withUsername("user1")
+                .password("SontgaClau123")
                     .authorities("READ","ROLE_USER")
                     .build(),
                 org.springframework.security.core.userdetails.User.withUsername("user2")
-                .password("{noop}password")
+                .password("SontgaMaria123")
                     .authorities("READ","ROLE_USER")
                     .build());
+
+    /* return new UserDetailsServiceImpl(); */
  
-    
     }
+
+    // bean that will customize SecurityFilterChain implementation
 
 
 	@Bean
@@ -78,16 +83,15 @@ public class SecurityConfig {
                 .build(); 
     }
 
-	private Customizer<HttpBasicConfigurer<HttpSecurity>> withDefaults() {
-        return null;
-    }
+	
 
 
     @Bean
     JwtEncoder jwtEncoder() {
         return new NimbusJwtEncoder(new ImmutableSecret<>(jwtKey.getBytes()));
     }
-
+    
+    // Bean that uses an implemenation of JwtDecoder to decode JWT tokens
 	@Bean
     public JwtDecoder jwtDecoder() {
         byte[] bytes = jwtKey.getBytes();

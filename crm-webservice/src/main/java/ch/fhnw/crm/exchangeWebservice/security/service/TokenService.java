@@ -15,11 +15,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TokenService {
+
+    // encoder bean from SecurityConfig
     private final JwtEncoder encoder;
+
+    //Injection into the constructor
 
     public TokenService(JwtEncoder encoder) {
         this.encoder = encoder;
     }
+
+    //method to generate a token
 
     public String generateToken(org.springframework.security.core.Authentication authentication) {
         Instant now = Instant.now();
@@ -27,6 +33,8 @@ public class TokenService {
                 .map(GrantedAuthority::getAuthority)
                 .filter(authority -> !authority.startsWith("ROLE"))
                 .collect(Collectors.joining(" "));
+
+        // claims builder
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
@@ -34,6 +42,8 @@ public class TokenService {
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
+
+        // encoder parameters
         var encoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS512).build(), claims);
         return this.encoder.encode(encoderParameters).getTokenValue();
     }

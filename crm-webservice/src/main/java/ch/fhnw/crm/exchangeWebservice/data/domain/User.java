@@ -20,6 +20,9 @@ public class User {
 	@NotEmpty(message = "Please provide a username.")
 	private String username;
 
+	@JsonIgnore
+	private String role = "USER";
+
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
@@ -111,6 +114,8 @@ public class User {
     public String getRole() {
         return null;
     }
+
+	
 
 	
 }
