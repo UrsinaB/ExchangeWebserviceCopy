@@ -22,11 +22,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u FROM User u JOIN u.items i WHERE i.id = :itemId")
 	User findByItemId(Long itemId);
 
+	//Find user by item id and user id
+	@Query("SELECT u FROM User u JOIN u.items i WHERE i.id = :itemId AND u.userId = :userId")
+	User findByItemIdAndUserId(Long itemId, Long userId);
+
 	//Find user by transation id
 	@Query("SELECT u FROM User u JOIN u.providingTransactions t WHERE t.id = :transactionId")
 	User findByTransactionId(Long transactionId);
 
-	// FInd the id of the user how was the providing user in the transaction
+	// Find the id of the user how was the providing user in the transaction
 	@Query("SELECT u FROM User u JOIN u.providingTransactions t WHERE t.id = :transactionId")
 	User findByProvidingTransactionsId(Long transactionId);
 

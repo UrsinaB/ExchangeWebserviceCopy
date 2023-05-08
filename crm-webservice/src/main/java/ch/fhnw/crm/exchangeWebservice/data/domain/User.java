@@ -3,6 +3,8 @@ package ch.fhnw.crm.exchangeWebservice.data.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +22,12 @@ public class User {
 	@NotEmpty(message = "Please provide a username.")
 	private String username;
 
+	@NotEmpty
+	private String firstname;
+
+	@NotEmpty
+	private String lastname;
+
 	@JsonIgnore
 	private String role = "USER";
 
@@ -29,6 +37,18 @@ public class User {
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
+
+	// image of the user
+	/*@Lob
+	@JsonIgnore
+	private byte[] image;*/
+
+
+	// the date the user was registered
+	@JsonIgnore
+	@Temporal(TemporalType.DATE)
+	private Date userCreationDate;
+
 
 	@Transient // will not be stored in DB
 	@Hidden
@@ -76,6 +96,22 @@ public class User {
 		this.username = username;
 	}
 
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String name) {
+		this.firstname = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String name) {
+		this.lastname = name;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -111,6 +147,15 @@ public class User {
     public void setUsername(String username2) {
     }
 
+	public Date getUserCreationDate() {
+		return userCreationDate;
+	}
+
+	public void setUserCreationDate(Date userCreationDate2) {
+		this.userCreationDate = userCreationDate2;
+
+	}
+	
     public String getRole() {
         return null;
     }

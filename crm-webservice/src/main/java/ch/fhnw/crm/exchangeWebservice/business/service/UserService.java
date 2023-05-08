@@ -1,5 +1,7 @@
 package ch.fhnw.crm.exchangeWebservice.business.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.stereotype.Service;
@@ -43,6 +45,15 @@ public class UserService {
     //get current user
     public User getCurrentUser() {
         return userRepository.findByUserId(1L);
+    }
+
+    // get user by userid and itemid and check if user is null
+    public User getUserByUserIdAndItemId(Long userId, Long itemId) {
+        User user = userRepository.findByItemIdAndUserId(itemId, userId);
+        if (user == null) {
+            user = userRepository.findByUserId(userId);
+        }
+        return user;
     }
 
     public User getCurrentUserById(long parseLong) {
