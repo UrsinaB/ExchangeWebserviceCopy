@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ch.fhnw.crm.exchangeWebservice.data.domain.ItemCategory;
+import ch.fhnw.crm.exchangeWebservice.data.domain.ItemCategory.CategoryName;
 
 
 @Repository
@@ -19,7 +20,7 @@ public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Long
     public Optional<ItemCategory> findById(Long id);
 
     // find item category by name
-    public ItemCategory findByCategoryName(String categoryName);
+    public ItemCategory findByCategoryName(CategoryName categoryName);
 
     // delete item category by id
     public void deleteById(Long id);

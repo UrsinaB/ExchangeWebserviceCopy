@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,9 +22,21 @@ public class ItemCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
+
+    //enum for item category
+    public enum CategoryName {
+        ELECTRONICS, FURNITURE, BOOKS, FASHION, CHILDERN, PETS, HOUSEHOLD, OTHER
+    }
+
     @NotEmpty(message = "Please provide a name for your item category")
     @Column(name = "categoryName")
-    private String categoryName;
+    private String CategoryName;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column (name = "categories")
+    private CategoryName categoryName;
+
 
    @OneToMany(mappedBy = "itemCategory")
     private List<Item> items;
@@ -30,7 +44,7 @@ public class ItemCategory {
     public ItemCategory() {
     }
 
-    public ItemCategory(Long categoryId, String categoryName, List<Item> items) {
+    public ItemCategory(Long categoryId, CategoryName categoryName, List<Item> items) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.items = items;
@@ -45,13 +59,14 @@ public class ItemCategory {
         this.categoryId = categoryId;
     }
 
-    public String getCategoryName() {
+    public CategoryName getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
+    public void setCategoryName(CategoryName categoryName) {
         this.categoryName = categoryName;
     }
+
 
 
 }
