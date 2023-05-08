@@ -38,11 +38,6 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
 
-	// image of the user
-	/*@Lob
-	@JsonIgnore
-	private byte[] image;*/
-
 
 	// the date the user was registered
 	@JsonIgnore
