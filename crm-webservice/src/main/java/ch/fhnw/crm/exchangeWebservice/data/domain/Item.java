@@ -44,6 +44,23 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 
+	@Column(name = "comment")
+    private String comment;
+
+	// TODO every item has one image
+
+	//enum for item rating
+	public enum ItemRating {
+		POSITIVE,
+		NEUTRAL,
+		NEGATIVE
+	}
+
+	// column for item rating
+	@Enumerated(EnumType.STRING)
+	private ItemRating itemRating;
+
+
 	@ManyToOne
 	@JoinColumn(name = "categoryId", nullable = false)
 	private ItemCategory itemCategory;
@@ -54,6 +71,10 @@ public class Item {
 	private User user;
 
 	// one item can have one transaction
+
+
+	
+
 	
 	@OneToOne
 	@JoinColumn(name = "transactionId")
@@ -107,6 +128,22 @@ public class Item {
 
 	public void setItemStatus(ItemStatus itemStatus) {
 		this.itemStatus = itemStatus;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public ItemRating getItemRating() {
+		return itemRating;
+	}
+
+	public void setItemRating(ItemRating itemRating) {
+		this.itemRating = itemRating;
 	}
 
 	public ItemCategory getItemCategory() {
