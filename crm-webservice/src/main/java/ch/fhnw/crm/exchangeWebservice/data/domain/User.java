@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,15 +56,6 @@ public class User {
 	@JsonIgnore
 	private List<Item> items;
 
-	// one user can have many transactions as providing user
-	@OneToMany(mappedBy = "providinguser")
-	@JsonIgnore
-	private List<Transaction> providingTransactions;
-
-	// one user can have many transactions as receiving user
-	@OneToMany(mappedBy = "receivinguser")
-	@JsonIgnore
-	private List<Transaction> receivingTransactions;
 	
     public User() {
 	}
@@ -73,6 +65,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.remember = remember;
+		
 	}
 
 	public Long getUserId() {

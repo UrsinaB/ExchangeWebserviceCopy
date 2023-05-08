@@ -33,11 +33,11 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name ="providinguserId", nullable = false)
-    private User providinguser;
+    private Providinguser providinguser;
 
     @ManyToOne
     @JoinColumn(name ="receivinguserId", nullable = false)
-    private User receivinguser;
+    private Receivinguser receivinguser;
 
     public Transaction() {
     }
@@ -64,7 +64,7 @@ public class Transaction {
         return providinguser;
     }
 
-    public void setProvidingUser(User providinguser) {
+    public void setProvidingUser(Providinguser providinguser) {
         this.providinguser = providinguser;
     }
 
@@ -72,7 +72,7 @@ public class Transaction {
         return receivinguser;
     }
 
-    public void setReceivingUser(User receivinguser) {
+    public void setReceivingUser(Receivinguser receivinguser) {
         this.receivinguser = receivinguser;
     }
 

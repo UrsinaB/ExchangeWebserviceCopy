@@ -47,8 +47,6 @@ public class Item {
 	@Column(name = "comment")
     private String comment;
 
-	// TODO every item has one image
-
 	//enum for item rating
 	public enum ItemRating {
 		POSITIVE,
