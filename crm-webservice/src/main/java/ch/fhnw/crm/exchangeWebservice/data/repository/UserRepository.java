@@ -26,18 +26,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u FROM User u JOIN u.items i WHERE i.id = :itemId AND u.userId = :userId")
 	User findByItemIdAndUserId(Long itemId, Long userId);
 
-	//Find user by transation id
-	@Query("SELECT u FROM User u JOIN u.providingTransactions t WHERE t.id = :transactionId")
-	User findByTransactionId(Long transactionId);
-
-	// Find the id of the user how was the providing user in the transaction
-	@Query("SELECT u FROM User u JOIN u.providingTransactions t WHERE t.id = :transactionId")
-	User findByProvidingTransactionsId(Long transactionId);
-
-	// Find the id of the user how was the receiving user in the transaction
-	@Query("SELECT u FROM User u JOIN u.receivingTransactions t WHERE t.id = :transactionId")
-	User findByReceivingTransactionsId(Long transactionId);
-
 	// Find user by user id
 	User  findByUserId(Long userId);
 
@@ -47,9 +35,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// Count number of users
 	long count();
 
+    Object findByEmailAndUserIdAndNameNot(String email, Long userId, String username);
 
-	@Query("SELECT u FROM User u WHERE u.email = :email AND u.userId != :userId AND u.username <> :username")
-	User findByEmailAndUserIdAndNameNot(String email, Long userId, String username);
+
 
 	
 

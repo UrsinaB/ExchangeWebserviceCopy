@@ -29,9 +29,6 @@ public class User {
 	@NotEmpty
 	private String lastname;
 
-	@JsonIgnore
-	private String role = "USER";
-
 	@Email(message = "Please provide a valid e-mail.")
 	@NotEmpty(message = "Please provide an e-mail.")
 	private String email;
@@ -39,33 +36,23 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	private String password;
 
-
-	// the date the user was registered
-	@JsonIgnore
-	@Temporal(TemporalType.DATE)
-	private Date userCreationDate;
-
-
 	@Transient // will not be stored in DB
 	@Hidden
 	private String remember;
 
-	//one user can have many items
+	// the date the user was registered
+	@JsonIgnore
+	@Temporal(TemporalType.DATE)
+	@GeneratedValue
+	private Date userCreationDate;
 
+	//one user can have many items
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Item> items;
 
 	
     public User() {
-	}
-
-	public User(String username, String email, String password, String remember) {
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.remember = remember;
-		
 	}
 
 	public Long getUserId() {
@@ -80,7 +67,7 @@ public class User {
 		return username;
 	}
 
-	public void setName(String username) {
+	public void setUserame(String username) {
 		this.username = username;
 	}
 
@@ -132,23 +119,13 @@ public class User {
 		this.remember = remember;
 	}
 
-    public void setUsername(String username2) {
-    }
-
 	public Date getUserCreationDate() {
 		return userCreationDate;
 	}
 
 	public void setUserCreationDate(Date userCreationDate2) {
 		this.userCreationDate = userCreationDate2;
-
 	}
 	
-    public String getRole() {
-        return null;
-    }
-
-	
-
 	
 }

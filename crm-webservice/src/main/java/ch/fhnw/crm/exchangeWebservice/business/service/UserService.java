@@ -2,8 +2,7 @@ package ch.fhnw.crm.exchangeWebservice.business.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder; 
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ch.fhnw.crm.exchangeWebservice.data.domain.User;
@@ -20,9 +19,7 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     Validator validator;
-    
-    @Autowired
-    PasswordEncoder passwordEncoder;
+   
     
 
     public void saveUser(@Valid User user) throws Exception {
@@ -33,7 +30,7 @@ public class UserService {
         } else if (userRepository.findByEmailAndUserIdAndNameNot(user.getEmail(), user.getUserId(), user.getUsername()) != null) {
             throw new Exception("Email address " + user.getEmail() + " and name " + user.getUsername() + " already assigned another user.");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         userRepository.save(user);
     }
 
